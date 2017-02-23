@@ -1,1 +1,3 @@
-# eveseat-explorer
+# EVE SeAT Explorer
+
+
