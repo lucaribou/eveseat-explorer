@@ -13,7 +13,6 @@ class CreateExplorerTables extends Migration
             $table->increments('id');
             $table->string('client_id', 300);
             $table->string('secret_key', 300);
-            $table->timestamps();
         });
 	}
 

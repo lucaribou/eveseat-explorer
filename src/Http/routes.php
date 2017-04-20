@@ -7,7 +7,8 @@ Route::group([
 ], function () {
 
 	Route::group([
-		'prefix' => 'maps'
+		'prefix' => 'maps',
+		'middleware' => ['sso-auth', 'explorer-settings']
 	], function() {
 
    		Route::get('/', [
@@ -25,6 +26,19 @@ Route::group([
 			'as' => 'explorer.settings.index',
 			'uses' => 'SettingsController@index',
 		]);
+	});
 
+	Route::group([
+		'prefix' => 'auth'
+	], function() {
+		Route::get('/', [
+			'as' => 'explorer.auth.index',
+			'uses' => 'AuthController@index',
+		]);
+
+		Route::get('callback', [
+			'as' => 'explorer.auth.callback',
+			'uses' => 'AuthController@callback',
+		]);
 	});
 });

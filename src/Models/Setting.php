@@ -11,4 +11,6 @@ class Setting extends Model
 		'client_id',
 		'secret_key'
 	];
+
+	public $timestamps = false;
 }

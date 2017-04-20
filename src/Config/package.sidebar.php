@@ -14,12 +14,18 @@ return [
         		'route'	=> 'explorer.maps.index',
         		'permission'	=> 'explorer.view'
         	],
-        	[
-        		'name'	=> 'Settings',
-        		'icon'	=> 'fa-cog',
-        		'route' => 'explorer.settings.index',
-        		'permission'	=> 'explorer.setup',
-        	]
+            [
+                'name'      => 'Auth',
+                'icon'      => 'fa-lock',
+                'route'     => 'explorer.auth.index',
+                'permission'    => 'explorer.view'
+            ],
+            [
+                'name'  => 'Settings',
+                'icon'  => 'fa-cog',
+                'route' => 'explorer.settings.index',
+                'permission'    => 'explorer.setup',
+            ]
         ]
     ]
 ];

@@ -18,6 +18,13 @@ class ExplorerServiceProvider extends ServiceProvider
         $this->addTranslations();
         $this->addMigrations();
         $this->addAssets();
+        $this->addMiddlewares();
+    }
+
+    public function addMiddlewares()
+    {
+        $this->app['router']->middleware('sso-auth', 'Seat\Cara\Explorer\Http\Middleware\SsoAuth');
+        $this->app['router']->middleware('explorer-settings', 'Seat\Cara\Explorer\Http\Middleware\Settings');
     }
 
     /**

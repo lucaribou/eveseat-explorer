@@ -5,5 +5,5 @@
 
 
 @section('full')
-
+	
 @stop

@@ -4,5 +4,4 @@
 @section('page_header', trans('explorer::words.settings'))
 
 @section('full')
-
 @stop
