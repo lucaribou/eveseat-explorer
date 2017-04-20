@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Seat\Web\Http\Controllers\Controller;
 
-class ExplorerController extends Controller
+class SettingsController extends Controller
 {
     public function index()
     {
-        return view("explorer::index");
+        return view("explorer::settings.index");
     }
 }
