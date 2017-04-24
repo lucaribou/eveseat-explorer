@@ -5,5 +5,5 @@
 
 
 @section('full')
-	
+	{{$location->solar_system_id}}
 @stop

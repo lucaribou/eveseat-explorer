@@ -8,15 +8,16 @@ use Seat\Web\Http\Controllers\Controller;
 use Seat\Cara\Explorer\Models\Setting;
 use Seat\Cara\Explorer\Helpers\Sso;
 
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Client;
-
 
 class AuthController extends Controller
 {
 	public function index()
 	{
-		$authUrl = Sso::getAuthUrl();
+		try {
+			$authUrl = Sso::getAuthUrl();
+		} catch(\Exception $e) {
+			return redirect('explorer/settings')->with('error', $e->getMessage());
+		}
 
 		return view("explorer::auth.index", [
         	'url' => $authUrl
@@ -27,23 +28,12 @@ class AuthController extends Controller
     {
     	if(session()->has('sso-state') && $request->state == session('sso-state')) {
 
-			$setting = Setting::all()->first();
-
-			if(!$setting) return redirect('explorer/settings')->with('error', trans('explorer::errors.insert_settings'));
-
-			$client = new \GuzzleHttp\Client();
-			$resp = $client->request('POST', 'https://login.eveonline.com/oauth/token', [
-				'form_params' 	=> [
-					'code'			=> $request->code,
-					'grant_type'	=> 'authorization_code'
-					],
-				'headers'	=> [
-				    'Authorization'     => 'Basic ' . base64_encode(decrypt($setting->client_id) . ':' . decrypt($setting->secret_key))
-				    ]
-				]
-			);
-			session(['sso-token' => json_decode($resp->getBody())->access_token]);
-    		return redirect('explorer/maps')->with('success', trans('explorer::success.auth'));
+			try {
+				Sso::login($request->code);
+    			return redirect('explorer/maps')->with('success', trans('explorer::success.auth'));		
+			} catch(\Exception $e) {
+				return redirect('explorer/settings')->with('error', $e->getMessage());
+			}
     	} else {
     		return redirect('explorer/maps')->with('error', trans('explorer::errors.state_sso'));
     	}
