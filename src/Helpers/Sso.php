@@ -3,6 +3,7 @@
 namespace Seat\Cara\Explorer\Helpers;
 
 use Seat\Cara\Explorer\Models\Setting;
+use Seat\Cara\Explorer\Models\Map;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
@@ -91,6 +92,6 @@ class Sso
                     throw new \Exception(trans("explorer::errors.default_sso_error"));
             }
         }
-        return json_decode($resp->getBody());
+        return Map::find(json_decode($resp->getBody())->solar_system_id);
     }
 }

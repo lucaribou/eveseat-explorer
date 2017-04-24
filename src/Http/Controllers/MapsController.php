@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Seat\Web\Http\Controllers\Controller;
 use Seat\Cara\Explorer\Helpers\Sso;
+use Seat\Cara\Explorer\Models\Map;
 
 class MapsController extends Controller
 {
